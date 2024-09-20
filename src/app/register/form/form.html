@@ -1,0 +1,98 @@
+<form [formGroup]="form" (ngSubmit)="processForm($event)">
+  <ion-list lines="full" class="ion-no-margin ion-no-padding">
+    <ion-item>
+      <ion-label position="floating">First Name <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input name="firstname" required type="text" formControlName="firstname"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Last Name <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="text" formControlName="lastname"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Email <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="text" formControlName="username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Address <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="text" formControlName="address"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Coords <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="text" formControlName="coords"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Password <ion-text color="danger">*</ion-text>
+      </ion-label>
+      <ion-input required type="password" formControlName="password"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Type User</ion-label>
+      <ion-select placeholder="Type User" (ionChange)="updateValidators($event);" formControlName="role_id">
+        <ion-select-option value="2">BUYER</ion-select-option>
+        <ion-select-option value="3">DRIVER</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+
+    <div *ngIf="form.get('role_id').value == 3">
+      <ion-item>
+        <ion-label position="floating">Brand Vehicle <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" formControlName="vehicle_brand"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Year Vehicle <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" formControlName="vehicle_year"></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label position="floating">License Vehicle <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" formControlName="vehicle_license"></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label position="floating">Color Vehicle <ion-text color="danger">*</ion-text>
+        </ion-label>
+        <ion-input required type="text" formControlName="vehicle_color"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-button expand="block" color="light" (click)="uploadImage(this.form)">
+          <ion-icon name="image-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item text-wrap *ngIf="this.form.get('users_photo').value">
+        <ion-thumbnail slot="start">
+          <ion-img [src]="this.form.get('users_photo').value"></ion-img>
+        </ion-thumbnail>
+        <ion-label>
+          Image
+        </ion-label>
+        <ion-button slot="end" fill="clear" (click)="arr.get('users_photo').setValue('')">
+          <ion-icon color="secondary" slot="icon-only" name="trash">Upload photo!</ion-icon>
+        </ion-button>
+      </ion-item>
+    </div>
+
+
+    <div class="ion-padding">
+      <ion-button expand="block" type="submit" class="ion-no-margin" [disabled]="form.invalid">Create account
+      </ion-button>
+      <br>
+      <ion-button expand="block" color="secondary" [routerLink]="['/login']" class="ion-no-margin">Back</ion-button>
+    </div>
+  </ion-list>
+</form>

@@ -1,0 +1,52 @@
+<ion-content class="ion-padding" [formGroup]="form">
+  <h3>Create Place</h3>
+  <div class="custom-card">
+
+    <!-- Textarea in an item with a floating label -->
+    <ion-item class="custom-item">
+      <ion-label position="floating">Name </ion-label>
+      <ion-textarea formControlName="place_name"></ion-textarea>
+
+    </ion-item>
+
+    <ion-item class="custom-item">
+      <ion-label position="floating">Phone</ion-label>
+      <ion-textarea formControlName="place_phone"></ion-textarea>
+    </ion-item>
+
+    <ion-item class="custom-item">
+      <ion-label position="floating">Address</ion-label>
+      <ion-textarea formControlName="place_address"></ion-textarea>
+    </ion-item>
+
+    <ion-item text-wrap *ngIf="form.get('place_photo').value !== ''">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="form.get('place_photo').value"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        {{ image.name }}
+      </ion-label>
+      <ion-button (click)="form.get('place_photo').setValue('')">
+        <ion-icon color="secondary" slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <div style="width: 100%; height: 200px;" [hidden]="isVisible">
+      <div id="map_canvas_place"></div>
+    </div>
+
+    <div style="text-align: left;">
+      <ion-button (click)="isVisible = !isVisible">
+        Hide map
+      </ion-button>
+      <ion-button (click)="uploadImage(this.form)">
+        <ion-icon name="image-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="createPlace()" [disabled]="form.invalid || !isReady">Create
+        Place
+      </ion-button>
+    </div>
+
+
+  </div>
+</ion-content>

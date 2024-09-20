@@ -1,0 +1,44 @@
+<ion-content class="ion-padding" [formGroup]="form">
+  <h3>Create Products</h3>
+  <div class="custom-card">
+    <ion-item text-wrap *ngIf="form.get('products_photo').value !== ''">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="form.get('products_photo').value"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        {{ image.name }}
+      </ion-label>
+      <ion-button (click)="form.get('products_photo').setValue('')">
+        <ion-icon color="secondary" slot="icon-only" name="trash"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <!-- Textarea in an item with a floating label -->
+    <ion-item>
+      <ion-label>Place</ion-label>
+      <ion-select placeholder="Select place!" formControlName="place_id">
+        <ion-select-option *ngFor="let place of place" [value]="place">{{place.place_name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item class="custom-item">
+      <ion-label position="floating">Name </ion-label>
+      <ion-textarea formControlName="products_name"></ion-textarea>
+
+    </ion-item>
+
+    <ion-item class="custom-item">
+      <ion-label position="floating">Price</ion-label>
+      <ion-input type="number" formControlName="products_price"></ion-input>
+    </ion-item>
+
+    <div style="text-align: left;">
+      <ion-button (click)="uploadImage(this.form)">
+        <ion-icon name="image-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="createProducts()" [disabled]="form.invalid || !isReady">Create
+        Products
+      </ion-button>
+    </div>
+
+
+  </div>
+</ion-content>

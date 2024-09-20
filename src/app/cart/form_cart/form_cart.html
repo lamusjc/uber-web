@@ -1,0 +1,30 @@
+<ion-button color="success" (click)="process();" [disabled]="total_price == 0">PROCESS PAYMENT:
+    {{'Total Price: ' + total_price}}
+</ion-button>
+
+<ion-button [routerLink]="['/home']">BACK</ion-button>
+
+<ion-grid>
+    <ion-row class="example-list">
+        <ion-col class="example-box" *ngFor="let arr of cart; let i = index;" size="12">
+            <ion-item text-wrap>
+                <ion-thumbnail slot="end">
+                    <ion-img
+                        [src]="arr.products_photo ? arr.products_photo : 'https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101028/112815904-stock-vector-no-image-available-icon-flat-vector-illustration.jpg?ver=6'">
+                    </ion-img>
+                </ion-thumbnail>
+                <ion-label>
+                    {{arr.place_name + ' - ' + arr.products_name}}
+                </ion-label>
+            </ion-item>
+            <!-- Textarea in an item with a floating label -->
+            <h3>Price: {{arr.products_price}}</h3>
+            <ion-button color="danger" (click)="deleteCart(arr.cart_id)">
+                DELETE CART
+            </ion-button>
+
+            <!-- <ion-button expand="block" (click)="openMenu()">Open Menu</ion-button> -->
+            <br>
+        </ion-col>
+    </ion-row>
+</ion-grid>

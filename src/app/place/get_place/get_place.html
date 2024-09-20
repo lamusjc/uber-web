@@ -1,0 +1,60 @@
+<ion-content class="ion-padding">
+  <h3>Place</h3>
+  <ion-grid>
+    <ion-row class="example-list">
+      <ion-col class="example-box" *ngFor="let arr of form.controls['place_edit'].controls; let i = index;" size="12">
+
+        <!-- Textarea in an item with a floating label -->
+        <ion-item class="custom-item">
+          <ion-label position="floating">Name </ion-label>
+          <ion-textarea [formControl]="arr.get('place_name')" [value]="arr.value.place_name"></ion-textarea>
+
+        </ion-item>
+        <ion-item class="custom-item">
+          <ion-label position="floating">Phone</ion-label>
+          <ion-textarea [formControl]="arr.get('place_phone')" [value]="arr.value.place_phone">
+          </ion-textarea>
+        </ion-item>
+
+        <ion-item class="custom-item">
+          <ion-label position="floating">Address</ion-label>
+          <ion-textarea [formControl]="arr.get('place_address')" [value]="arr.value.place_address"></ion-textarea>
+        </ion-item>
+
+        <!-- <ion-item class="custom-item">
+          <ion-label position="floating">Coords</ion-label>
+          <ion-textarea [formControl]="arr.get('place_coords')" [value]="arr.value.place_coords"></ion-textarea>
+        </ion-item> -->
+
+        <ion-item text-wrap *ngIf="arr.value.place_photo">
+          <ion-thumbnail slot="start">
+            <ion-img [src]="arr.value.place_photo"></ion-img>
+          </ion-thumbnail>
+          <ion-label>
+            Image
+          </ion-label>
+          <ion-button slot="end" fill="clear" (click)="arr.get('place_photo').setValue('')">
+            <ion-icon color="secondary" slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <!-- <ion-button expand="block" (click)="openMenu()">Open Menu</ion-button> -->
+        <div>
+          <ion-button expand="block" color="light" (click)="uploadImage(arr)">
+            <ion-icon name="image-outline"></ion-icon>
+          </ion-button>
+
+          <ion-button expand="block" color="light" (click)="modifyPlace(arr)">
+            <ion-icon name="pencil-outline"></ion-icon>
+          </ion-button>
+
+          <ion-button expand="block" color="light" (click)="deletePlace(arr)">
+            <ion-icon name="trash-bin-outline"></ion-icon>
+          </ion-button>
+
+        </div>
+        <br>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

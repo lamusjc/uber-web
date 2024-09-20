@@ -1,0 +1,53 @@
+<ion-app>
+  <div class="ion-page">
+    <ion-header>
+      <toolbar-component [name]="'Home'"></toolbar-component>
+    </ion-header>
+    <ion-content *ngIf="values?.role_id == 2" [ngStyle]="{'opacity': Opacity}" class="ion-padding">Hi
+      {{values?.username}}! select your place!
+      <ion-grid>
+        <ion-row class="example-list">
+          <ion-col class="example-box" *ngFor="let arr of place; let i = index;" size="12">
+            <ion-item text-wrap>
+              <ion-thumbnail slot="end">
+                <ion-img
+                  [src]="arr.place_photo ? arr.place_photo : 'https://www.ibts.org/wp-content/uploads/2017/08/iStock-476085198.jpg'">
+                </ion-img>
+              </ion-thumbnail>
+              <ion-label>
+                {{arr.place_name}}
+              </ion-label>
+            </ion-item>
+            <!-- Textarea in an item with a floating label -->
+            <h5>{{arr.place_phone}}</h5>
+            <h5>{{arr.place_address}}</h5>
+            <ion-button (click)="goProducts(arr.place_id)">
+              Select this
+            </ion-button>
+            <ion-button (click)="seeCoords(arr.place_coords)">
+              See coords
+            </ion-button>
+
+            <!-- <ion-button expand="block" (click)="openMenu()">Open Menu</ion-button> -->
+            <br>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </ion-content>
+
+    <ion-content *ngIf="values?.role_id == 1" [ngStyle]="{'opacity': Opacity}" class="ion-padding">Hi ADMIN
+      {{values?.username}}! choose your option!
+      <ion-label>
+      </ion-label>
+
+    </ion-content>
+
+    <ion-content *ngIf="values?.role_id == 3" [ngStyle]="{'opacity': Opacity}" class="ion-padding">Hi DRIVER
+      {{values?.username}}! choose your option!
+      <ion-label>
+      </ion-label>
+
+    </ion-content>
+  </div>
+</ion-app>

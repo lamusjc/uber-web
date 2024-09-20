@@ -1,0 +1,41 @@
+<ion-button [routerLink]="['/home']">BACK</ion-button>
+
+<ion-grid>
+  <ion-row class="example-list">
+    <ion-col class="example-box" *ngFor="let arr of payment; let i = index;" size="12">
+      <ion-label>
+        {{'BILL: #' + arr.bill_id}} <h5 *ngIf="arr.bill_status == 0" style="color: blue">Pending</h5>
+      </ion-label>
+
+      <ion-label>
+        <h5 *ngIf="arr.bill_status == 1" style="color: green">Delivered</h5>
+      </ion-label>
+
+      <li *ngFor="let arr2 of arr.detail; let j = index;" [hidden]="!arr.visible" style="display: block;">
+        <ul style="margin: 0;
+              padding: 0;">
+          <ion-item text-wrap>
+            <ion-thumbnail slot="end">
+              <ion-img
+                [src]="arr2.products_photo ? arr2.products_photo : 'https://us.123rf.com/450wm/pavelstasevich/pavelstasevich1811/pavelstasevich181101028/112815904-stock-vector-no-image-available-icon-flat-vector-illustration.jpg?ver=6'">
+              </ion-img>
+            </ion-thumbnail>
+            <ion-label>
+              {{arr2.place_name + ' - ' + arr2.products_name}}
+              <h5>Price: {{arr2.products_price}}</h5>
+            </ion-label>
+          </ion-item>
+        </ul>
+      </li>
+      <h5>
+        Total Price: {{arr.bill_total_price}}
+      </h5>
+
+      <ion-button expand="block" (click)="arr.visible = !arr.visible">SEE DETAIL</ion-button>
+
+      <ion-button *ngIf="arr.bill_status == 0 && values.role_name !== 'ADMIN'" expand="block"
+        (click)="chat(arr.bill_id, arr.users_id, arr.bill_users_received);">CHAT</ion-button>
+      <br>
+    </ion-col>
+  </ion-row>
+</ion-grid>

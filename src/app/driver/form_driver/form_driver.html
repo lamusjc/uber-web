@@ -1,0 +1,34 @@
+<ion-button [routerLink]="['/home']">BACK</ion-button>
+
+<ion-grid>
+    <ion-row class="example-list">
+        <ion-col class="example-box" *ngFor="let arr of driver; let i = index;" size="12">
+            <ion-item text-wrap>
+                <ion-thumbnail slot="end">
+                    <ion-img
+                        [src]="arr.users_photo ? arr.users_photo : 'https://www.ibts.org/wp-content/uploads/2017/08/iStock-476085198.jpg'">
+                    </ion-img>
+                </ion-thumbnail>
+                <ion-label>
+                    <h3>{{arr.users_username}}</h3>
+                    {{arr.users_firstname + ' - ' + arr.users_lastname}}
+                </ion-label>
+            </ion-item>
+            <!-- Textarea in an item with a floating label -->
+            <ion-label style="padding: 0;">
+                <h3>VEHICLE: </h3>
+                <h4>Brand: {{arr.users_vehicle_brand}}</h4>
+                <h4>Year: {{arr.users_vehicle_year}}</h4>
+                <h4>License: {{arr.users_vehicle_license}}</h4>
+                <h4>Color: {{arr.users_vehicle_color}}</h4>
+
+            </ion-label>
+            <ion-button color="primary" (click)="acceptDriver(arr.users_id)" *ngIf="!arr.users_accepted">
+                ACCEPT DRIVER
+            </ion-button>
+
+            <!-- <ion-button expand="block" (click)="openMenu()">Open Menu</ion-button> -->
+            <br>
+        </ion-col>
+    </ion-row>
+</ion-grid>

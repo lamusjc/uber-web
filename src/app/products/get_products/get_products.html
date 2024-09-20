@@ -1,0 +1,58 @@
+<ion-content class="ion-padding">
+  <h3>Products</h3>
+  <ion-grid>
+    <ion-row class="example-list">
+      <ion-col class="example-box" *ngFor="let arr of form.controls['products_edit'].controls; let i = index;"
+        size="12">
+
+        <ion-item>
+          <ion-label>Place</ion-label>
+          <ion-select placeholder="Select place!" [formControl]="arr.get('place_id')">
+            <ion-select-option *ngFor="let place of place" [value]="place.place_id">{{place.place_name}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item class="custom-item">
+          <ion-label position="floating">Name </ion-label>
+          <ion-textarea [formControl]="arr.get('products_name')" [value]="arr.value.products_name"></ion-textarea>
+
+        </ion-item>
+        <ion-item class="custom-item">
+          <ion-label position="floating">Price</ion-label>
+          <ion-input type="number" [formControl]="arr.get('products_price')" [value]="arr.value.products_price">
+          </ion-input>
+        </ion-item>
+
+        <ion-item text-wrap *ngIf="arr.value.products_photo">
+          <ion-thumbnail slot="start">
+            <ion-img [src]="arr.value.products_photo"></ion-img>
+          </ion-thumbnail>
+          <ion-label>
+            Image
+          </ion-label>
+          <ion-button slot="end" fill="clear" (click)="arr.get('products_photo').setValue('')">
+            <ion-icon color="secondary" slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </ion-item>
+
+        <!-- <ion-button expand="block" (click)="openMenu()">Open Menu</ion-button> -->
+        <div>
+          <ion-button expand="block" color="light" (click)="uploadImage(arr)">
+            <ion-icon name="image-outline"></ion-icon>
+          </ion-button>
+
+          <ion-button expand="block" color="light" (click)="modifyProducts(arr)">
+            <ion-icon name="pencil-outline"></ion-icon>
+          </ion-button>
+
+          <ion-button expand="block" color="light" (click)="deleteProducts(arr)">
+            <ion-icon name="trash-bin-outline"></ion-icon>
+          </ion-button>
+
+        </div>
+        <br>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
